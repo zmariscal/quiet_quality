@@ -1,5 +1,10 @@
 # Changelog
 
+## Release 1.5.3
+
+* Fix `Git#comparison_base` to work with `git` gem 5.x, which changed
+  `#merge_base` to return raw SHA strings instead of commit objects
+
 ## Release 1.5.2
 
 * Support command/exec-command overrides (yaml-only) (#127)

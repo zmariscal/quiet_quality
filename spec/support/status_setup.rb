@@ -9,6 +9,13 @@ module StatusSetup
       allow(Open3).to receive(:capture3).and_return([output, error, stat])
     end
   end
+
+  def stub_capture3_for(*args, output: "fake output", error: "fake error", status: 0)
+    allow(Open3).to receive(:capture3).and_call_original
+    mock_status(status).tap do |stat|
+      allow(Open3).to receive(:capture3).with(*args).and_return([output, error, stat])
+    end
+  end
 end
 
 RSpec.configure do |config|
