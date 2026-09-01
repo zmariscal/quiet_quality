@@ -145,7 +145,7 @@ RSpec.describe QuietQuality::VersionControlSystems::Git do
         it "raises an appropriate exception" do
           expect { comparison_base }.to raise_error(
             QuietQuality::VersionControlSystems::Git::Error,
-            "git merge-base failed"
+            "git merge-base failed: `git -C #{git_repo_path} merge-base #{branch} #{sha}`"
           )
         end
       end
