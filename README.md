@@ -80,10 +80,10 @@ But if you want to run brakeman, you could call `qq brakeman`:
 
 ## CI Usage Examples
 
-Currently, QuietQuality is most useful from GitHub Actions - in that context, it's
-possible to generate nice annotations for the analyzed commit (using Workflow
-Actions). But it can be used from other CI systems as well, you just won't get
-nice annotations out of it (yet).
+Currently, QuietQuality is most useful from GitHub Actions - in that context,
+it's possible to generate nice annotations for the analyzed commit (using
+Workflow Actions). But it can be used from other CI systems as well, you just
+won't get nice annotations out of it (yet).
 
 For CI systems, you can either configure your execution entirely through
 command-line arguments, or you can create additional configuration files and
