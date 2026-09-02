@@ -61,7 +61,10 @@ module QuietQuality
       # @return [String] The nearest common ancestor (SHA)
       #
       def comparison_base(sha:, comparison_branch:)
-        git.merge_base(comparison_branch, sha).first.sha
+        cmd = ["git", "-C", path, "merge-base", comparison_branch, sha]
+        out, _err, stat = Open3.capture3(*cmd)
+        fail(Error, "git merge-base failed: `#{cmd.join(" ")}`") unless stat.success?
+        out.strip
       end
 
       private

@@ -112,7 +112,9 @@ RSpec.describe QuietQuality::VersionControlSystems::Git do
           end
 
           context "when capture3 fails" do
-            before { stub_capture3(status: 28) }
+            before do
+              stub_capture3_for("git", "-C", git_repo_path, "ls-files", "--others", "--exclude-standard", status: 28)
+            end
 
             it "raises an appropriate exception" do
               expect { changed_files }.to raise_error(
@@ -136,6 +138,17 @@ RSpec.describe QuietQuality::VersionControlSystems::Git do
       let(:branch) { "main" }
       subject(:comparison_base) { instance.comparison_base(sha: sha, comparison_branch: branch) }
       it { is_expected.to eq("d1e4d54ffff66d229cebe8cf8e9530b61998e119") }
+
+      context "when capture3 fails" do
+        before { stub_capture3(status: 28) }
+
+        it "raises an appropriate exception" do
+          expect { comparison_base }.to raise_error(
+            QuietQuality::VersionControlSystems::Git::Error,
+            "git merge-base failed: `git -C #{git_repo_path} merge-base #{branch} #{sha}`"
+          )
+        end
+      end
     end
   end
 end
