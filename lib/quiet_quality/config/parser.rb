@@ -123,7 +123,7 @@ module QuietQuality
 
         unless from.nil? || from.include?(value.to_sym)
           allowed_list = from.respond_to?(:keys) ? from.keys : from
-          allowed_string = allowed_list.map(&:to_s).join(", ")
+          allowed_string = allowed_list.join(", ")
           invalid!("option #{name} must be one of the allowed values: #{allowed_string}")
         end
       end
